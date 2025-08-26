@@ -1,0 +1,12 @@
+body{
+ font-family: "Rubik", sans-serif;
+ font-weight: 400;
+}
+.gradient{
+           background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+}
+.form-error{
+     font-size: smaller;
+     color: #dc3545;
+     font-style: italic;
+}
