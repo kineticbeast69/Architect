@@ -18,7 +18,7 @@ return new class extends Migration {
             $table->string("subject", 200)->nullable(true);
             $table->text("message")->nullable(true);
             $table->dateTime("submitted_at")->useCurrent();
-            $table->enum("status", ["new", "in-progress", "resolved"])->default("new");
+            $table->enum("status", ["new", "in-progress", "resolved", "reach-out"])->default("new");
             $table->timestamps();
         });
     }

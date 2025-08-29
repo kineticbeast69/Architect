@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class EditorDashboard extends Component
+class WriterSidebarList extends Component
 {
     /**
      * Create a new component instance.
@@ -21,6 +21,6 @@ class EditorDashboard extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.editor-dashboard');
+        return view('components.writer-sidebar-list');
     }
 }

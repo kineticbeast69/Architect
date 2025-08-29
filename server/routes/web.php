@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthenticationController;
 use App\Http\Controllers\AdminController;
 
+
 // midlewares
-use App\Http\Middleware\RoleMiddleware;
 use App\Http\Middleware\ValidAuthMiddleware;
 
 // all the views are here
@@ -17,7 +17,7 @@ Route::view("/register", "register")->name("register");
 Route::view("/forget-password", "forgetPassword")->name("forget_password");
 
 
-// auth controller
+// auth routes
 Route::controller(AuthenticationController::class)->group(function () {
     Route::post("/login-form", 'login_form');
     Route::post("/register-form", 'register_form');
@@ -25,8 +25,17 @@ Route::controller(AuthenticationController::class)->group(function () {
     Route::delete("/logout", "logout")->name("logout");
 });
 
-// admin controller
+// admin routes
 Route::controller(AdminController::class)->middleware(ValidAuthMiddleware::class)->group(function () {
+    // admin routes are here
     Route::view("/", "index")->name("home");
+
+    // writer routes are here
+
+    // employee routes are here
+    Route::get("/employee/dashboard", )->middleware("can:isEmployee");
 });
+
+
+
 
