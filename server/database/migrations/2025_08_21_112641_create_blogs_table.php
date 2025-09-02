@@ -12,14 +12,18 @@ return new class extends Migration {
     {
         Schema::create('blogs', function (Blueprint $table) {
             $table->id();
-            $table->string("title")->nullable(true);
-            $table->text("slug")->unique()->nullable(true);
-            $table->longText("description")->nullable(true);
-            $table->enum("status", ["public", "private"])->default("private");
+            $table->string("blog_id", 15)->unique()->nullable(); // optional custom ID
             $table->foreignId("author_id")->constrained("users")->onDelete("cascade");
-            $table->string("image")->nullable(true);
+            $table->string("title")->nullable();
+            $table->string("slug")->unique()->nullable(); // slug is usually short
+            $table->longText("description")->nullable();
+            $table->boolean("updated_blog")->default(false);
+            $table->enum("status", ["public", "private"])->default("private");
+            $table->string("image")->nullable();
+            $table->dateTime("published_at")->nullable(); // fixed
             $table->timestamps();
         });
+
     }
 
     /**

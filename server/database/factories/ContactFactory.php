@@ -23,7 +23,7 @@ class ContactFactory extends Factory
             "subject" => fake()->text(100),
             "message" => fake()->paragraph(),
             "submitted_at" => fake()->dateTime(),
-            "status" => fake()->randomElement(["new", "in-progress", "resolved"])
+            "status" => fake()->randomElement(["New", "Reach-out", "In-Progress", "Resolved"])
         ];
     }
 }

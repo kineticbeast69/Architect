@@ -60,8 +60,9 @@
                <button type="submit" class="btn btn-primary w-100 rounded-3">Login to Architect</button>
           </form>
 
-          {{-- forgetPassword --}}
-          <div class="text-center mt-3">
+          {{-- forgetPassword and register route --}}
+          <div class="d-flex align-items-center justify-content-between mt-3">
+               <a href="{{ route('register') }}" class="text-decoration-none">Register</a>
                <a href="{{ route('forget_password') }}" class="text-decoration-none">Forgot Password?</a>
           </div>
      </div>

@@ -1,0 +1,86 @@
+@include("subview.header")
+
+{{-- notification --}}
+<div class="position-absolute top-0 end-0 z-3">
+     @if (session('tech_error'))
+          <x-notification type="danger" message="{{ session('tech_error') }}" />
+     @endif
+     @if (session('blog_success'))
+          <x-notification type="success" message="{{ session('blog_success') }}" />
+     @endif
+</div>
+
+
+<main class="d-flex">
+     <aside>
+          @include("subview.sidebar")
+     </aside>
+
+     {{-- add blog seciton --}}
+     <div class="container py-3 border-bottom border-secondary" style="overflow-y: auto; height: 100dvh;">
+          <div class="row">
+               <div class="col-12">
+                    <div class="card shadow-sm border-0">
+                         <div class="card-header bg-dark text-white text-center">
+                              <h4 class="mb-0">✍️ Write a New Blog</h4>
+                         </div>
+                         <div class="card-body">
+                              <form method="post" action="{{ route("addBlogForm") }}" enctype="multipart/form-data">
+                                   @csrf
+                                   <!-- Blog Title -->
+                                   <div class="mb-3">
+                                        <label for="title" class="form-label fs-3">*Blog Title</label>
+                                        <input type="text" class="form-control border border-secondary" id="title"
+                                             placeholder="Enter a your blog title" name="title">
+                                        <small class="text-muted">Your title will also generate the blog’s slug
+                                             automatically.</small>
+                                        {{-- title error zone --}}
+                                        @error('title')
+                                             <p class="form-error">{{$message}}</p>
+                                        @enderror
+                                   </div>
+
+                                   <!-- Blog Content -->
+                                   <div class="mb-3">
+                                        <label for="description" class="form-label fs-3">Blog Content</label>
+                                        <textarea class="form-control border border-secondary" id="description"
+                                             rows="10" placeholder="Start writing your blog..."
+                                             name="description"></textarea>
+                                        {{-- description error zone --}}
+                                        @error('description')
+                                             <p class="form-error">{{$message }}</p>
+                                        @enderror
+                                   </div>
+
+                                   <!-- Image Upload -->
+                                   <div class="mb-3">
+                                        <label for="image" class="form-label fs-3">Featured Image</label>
+                                        <input class="form-control border border-secondary bg-secondary" type="file"
+                                             id="image" accept="image/*" name="image">
+                                        <small class="text-muted ">Upload a banner or cover image
+                                             for your blog.</small>
+                                        @error('image')
+                                             <p class="form-error">{{ $message }}</p>
+                                        @enderror
+                                   </div>
+
+                                   <!-- Buttons -->
+                                   <div class="d-flex justify-content-end">
+                                        <a href="{{ route("writer.dashboard") }}">
+                                             <button type="button" class="btn btn-outline-primary me-2">
+                                                  <span>
+                                                       <i
+                                                            class="fa-sharp-duotone fa-solid fa-arrow-left"></i></span>Back</button>
+                                        </a>
+                                        <button type="reset" class="btn btn-outline-secondary me-2">Discard</button>
+                                        <button type="submit" class="btn btn-success">Publish Blog</button>
+                                   </div>
+                              </form>
+                         </div>
+                    </div>
+               </div>
+          </div>
+     </div>
+
+</main>
+@include("subview.footer")
