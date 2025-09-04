@@ -17,13 +17,13 @@
         </a>
     </li>
     <li>
-        <a href="{{ route('products') }}"
-            class="nav-link text-white {{ request()->routeIs('products') ? 'active' : '' }}">
-            <i class="fa-sharp fa-solid fa-diagram-project"></i> Products
+        <a href="{{ route('projects') }}"
+            class="nav-link text-white {{ request()->routeIs('projects') ? 'active' : '' }}">
+            <i class="fa-sharp fa-solid fa-diagram-project"></i> Projects
         </a>
     </li>
     <li>
-        <a href="{{ route('team') }}" class="nav-link text-white {{ request()->routeIs('team') ? 'active' : '' }}">
+        <a href="{{ route('teams') }}" class="nav-link text-white {{ request()->routeIs('teams') ? 'active' : '' }}">
             <i class="fa-sharp fa-solid fa-people-group"></i> Team member
         </a>
     </li>

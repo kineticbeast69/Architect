@@ -1,16 +1,15 @@
 @include("subview.header")
-<main class="d-flex  flex-wrap  bg-light" style="min-height:100vh;">
+
+<main class="d-flex">
      <aside>
-          @include('subview.sidebar')
+          @include("subview.sidebar")
      </aside>
-
-
      {{-- dashboar with table list --}}
      <div class="flex-grow-1 p-4 bg-white" style="height: 100dvh; overflow-y: auto; scrollbar-width: none;">
 
-          {{-- new contact list --}}
+          {{-- finished contacts list --}}
           <div class="border border-secondary-subtle rounded shadow-lg px-2 py-4 mb-4">
-               <h2 class="fw-bold mb-3">📋 New Contact List</h2>
+               <h2 class="fw-bold mb-3">📃 Finished Contact List</h2>
                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
                     <table class="table table-secondary table-hover align-middle rounded text-center border">
                          <thead class="table-dark">
@@ -23,26 +22,46 @@
                               </tr>
                          </thead>
                          <tbody>
-                              @forelse ($NewContact as $index => $new)
+                              @forelse ($Dones as $index => $done)
+                                   <tr>
+                                        <td>{{ $index += 1 }}</td>
+                                        <td class="text-primary">{{ $done->name }}</td>
+                                        <td>{{ $done->email }}</td>
+                                        <td>{{ $done->phone_number }}</td>
+                                        <td><span class="badge text-bg-success">{{ $done->status }}</span></td>
+                                   </tr>
+                              @empty
+                                   <tr>
+                                        <td colspan="5" class="text-center">No contacts found</td>
+                                   </tr>
+                              @endforelse
+                         </tbody>
+
+                    </table>
+               </div>
+          </div>
+          {{-- resolved list table --}}
+          <div class="border border-secondary-subtle rounded shadow-lg px-2 py-4 mb-4">
+               <h2 class="fw-bold mb-3">📋 Newly Contact List</h2>
+               <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
+                    <table class="table table-secondary table-hover align-middle rounded text-center border">
+                         <thead class="table-dark">
+                              <tr>
+                                   <th>Serial No</th>
+                                   <th>Name</th>
+                                   <th>Email</th>
+                                   <th>Phone</th>
+                                   <th>Status</th>
+                              </tr>
+                         </thead>
+                         <tbody>
+                              @forelse ($News as $index => $new)
                                    <tr>
                                         <td>{{ $index += 1 }}</td>
                                         <td class="text-primary">{{ $new->name }}</td>
                                         <td>{{ $new->email }}</td>
                                         <td>{{ $new->phone_number }}</td>
-                                        <td>
-                                             <form action="{{ route('employee.dashboard.update', ['id' => $new->id]) }}"
-                                                  method="post">
-                                                  @csrf
-                                                  @method("put")
-                                                  <select class="form-select form-select-sm" name="status"
-                                                       onchange="this.form.submit()">
-                                                       <option>New</option>
-                                                       <option value="in-progress">In Progress</option>
-                                                       <option value="reach-out">Reach Out</option>
-                                                       <option value="resolved">Resolved</option>
-                                                  </select>
-                                             </form>
-                                        </td>
+                                        <td>{{ $new->status }}</td>
                                    </tr>
                               @empty
                                    <tr>
@@ -55,9 +74,9 @@
                </div>
           </div>
 
-          {{-- reach out contact list --}}
+          {{-- reach out and in-progress contact list --}}
           <div class="border border-secondary-subtle rounded shadow-lg px-2 py-4">
-               <h2 class="fw-bold mb-3">📞 Reach Out Contact List</h2>
+               <h2 class="fw-bold mb-3">📞 Under process Contact List</h2>
                <div class="table-responsive" style="max-height: 300px; overflow-y: auto;">
                     <table class="table table-secondary  table-hover align-middle text-center border">
                          <thead class="table-dark">
@@ -70,14 +89,14 @@
                               </tr>
                          </thead>
                          <tbody>
-                              @forelse ($ReachContact as $index => $reach)
+                              @forelse ($Unders as $index => $under)
                                    <tr>
                                         <td>{{ $index += 1 }}</td>
-                                        <td class="text-primary">{{ $reach->name }}</td>
-                                        <td>{{ $reach->email }}</td>
-                                        <td>{{ $reach->phone_number }}</td>
+                                        <td class="text-primary">{{ $under->name }}</td>
+                                        <td>{{ $under->email }}</td>
+                                        <td>{{ $under->phone_number }}</td>
                                         <td>
-                                             <span class="badge text-bg-warning">{{ $reach->status }}</span>
+                                             <span class="badge text-bg-warning">{{ $under->status }}</span>
                                         </td>
                                    </tr>
                               @empty
@@ -90,6 +109,9 @@
                </div>
           </div>
      </div>
-
 </main>
+
+
+
+
 @include("subview.footer")

@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 class Service extends Model
 {
     use HasFactory;
-    protected $fillable = ["construction_type", "title", "description", "image"];
+    protected $fillable = ["construction_type", "title", "description", "image", 'Service_id'];
 }
